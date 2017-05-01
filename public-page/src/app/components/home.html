@@ -1,0 +1,61 @@
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<div style="background-color:beige;">
+    <div class="container text-center">
+        <h2>Add a topic</h2>
+        <div class="form-group" style="margin:10px"><br />
+            <input id="title" type="text" class="form-control" name="title" placeholder="Title" #title><br />
+            <input id="email" type="text" class="form-control" name="email" placeholder="Your Email" #email><br />
+            <textarea class="form-control" rows="5" id="comment" placeholder="Your Feedback" #text></textarea><br />
+            <button (click)="addTopic(title.value, text.value, email.value)">Submit</button>
+        </div>
+    </div>
+    <hr />
+    <div class="container">
+        <div class="col-sm-6" *ngFor="let topic of topics">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>{{topic.title}}</h4>
+                    <h5>{{topic.email}}</h5>
+                    <p>{{topic.date}}</p>
+                </div>
+                <div class="panel-body">{{topic.text}}</div>
+                <div class="panel-footer">
+                    <h5>Comments</h5>
+                    <div *ngFor="let post of getPosts(topic)">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h4>{{post.email}}</h4>
+                                <h5>{{post.date}}</h5>
+                                <p>{{post.text}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin:10px"><br />
+                        <input id="email" type="text" class="form-control" name="email" placeholder="Your Email" #email><br/>
+                        <textarea class="form-control" rows="5" id="comment" placeholder="Your Comment" #text></textarea><br/>
+                        <button (click)="addPost(topic, email.value, text.value)">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="container">
+        <div class="text-center">
+            <h2>Summary</h2>
+        </div>
+        <div class="col-sm-3" *ngFor="let topic of topics">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h4>{{topic.title}}</h4>
+                    <b># of posts: {{getNumberOfPosts(topic)}}</b>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
